@@ -77,27 +77,38 @@ export const subscription = pgTable("subscription", {
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
-/* Webhook idempotency */
 export const stripeEvent = pgTable("stripe_event", {
-  id: text("id").primaryKey(), // Stripe event.id
+  id: text("id").primaryKey(),
   type: text("type").notNull(),
   processedAt: timestamp("processed_at", { withTimezone: true }).notNull().defaultNow(),
   payload: jsonb("payload").notNull(),
 });
 
-/* Example feature table — specialist agents extend/replace this */
-export const todo = pgTable("todo", {
+/* ─────────── Booking tables ─────────── */
+
+export const canaryAvailabilitySlots = pgTable("canary_availability_slots", {
   id: uuid("id").primaryKey().defaultRandom(),
-  userId: text("user_id")
+  providerEmail: text("provider_email").notNull(),
+  startsAt: timestamp("starts_at", { withTimezone: true }).notNull(),
+  endsAt: timestamp("ends_at", { withTimezone: true }).notNull(),
+  timezone: text("timezone").notNull().default("UTC"),
+  isBooked: boolean("is_booked").notNull().default(false),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const canaryBookings = pgTable("canary_bookings", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  slotId: uuid("slot_id")
     .notNull()
-    .references(() => user.id, { onDelete: "cascade" }),
-  title: text("title").notNull(),
-  completed: boolean("completed").notNull().default(false),
-  sortOrder: integer("sort_order").notNull().default(0),
+    .references(() => canaryAvailabilitySlots.id, { onDelete: "cascade" }),
+  customerEmail: text("customer_email").notNull(),
+  note: text("note"),
+  status: text("status").notNull().default("confirmed"),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
 export type User = typeof user.$inferSelect;
 export type Session = typeof session.$inferSelect;
 export type Subscription = typeof subscription.$inferSelect;
-export type Todo = typeof todo.$inferSelect;
+export type CanaryAvailabilitySlot = typeof canaryAvailabilitySlots.$inferSelect;
+export type CanaryBooking = typeof canaryBookings.$inferSelect;
