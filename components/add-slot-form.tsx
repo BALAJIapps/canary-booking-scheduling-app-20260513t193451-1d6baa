@@ -107,7 +107,7 @@ export default function AddSlotForm() {
       {success && (
         <div className="mt-3 flex items-center gap-2 text-green-700">
           <CheckCircle className="h-3.5 w-3.5" strokeWidth={1.8} />
-          <span className="text-[12px]">Slot added successfully!</span>
+          <span className="text-[12px]">Slot scheduled successfully!</span>
         </div>
       )}
 
@@ -117,9 +117,9 @@ export default function AddSlotForm() {
         className="mt-4 w-full bg-[#242424] hover:bg-[#111111] text-white text-[13px] h-9"
       >
         {loading ? (
-          <><Loader2 className="h-3.5 w-3.5 animate-spin mr-2" />Adding...</>
+          <><Loader2 className="h-3.5 w-3.5 animate-spin mr-2" />Scheduling...</>
         ) : (
-          <><Plus className="h-3.5 w-3.5 mr-2" />Add slot</>
+          <><Plus className="h-3.5 w-3.5 mr-2" />Schedule slot</>
         )}
       </Button>
     </form>
