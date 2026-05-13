@@ -4,6 +4,7 @@ import { eq } from "drizzle-orm";
 import { Calendar, Clock, User, ShieldCheck, CheckCircle, XCircle, CalendarCheck } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import AddSlotForm from "@/components/add-slot-form";
+import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
@@ -56,14 +57,12 @@ export default async function AdminPage() {
             <ShieldCheck className="h-5 w-5 text-[#242424]" strokeWidth={1.7} />
             <span className="text-[15px] font-semibold text-[#242424] tracking-tight">SlotBook Admin</span>
           </div>
-          <div className="flex items-center gap-3">
-            <a
-              href="/"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-[rgba(34,42,53,0.12)] px-3.5 py-1.5 text-[13px] font-medium text-[#242424] hover:bg-[#f5f5f5] transition-colors"
-            >
-              &larr; Customer view
-            </a>
-          </div>
+          <Link
+            href="/"
+            className="text-[13px] text-[#898989] hover:text-[#242424] transition-colors"
+          >
+            &larr; Customer view
+          </Link>
         </div>
       </nav>
 
@@ -91,7 +90,9 @@ export default async function AdminPage() {
         <div className="grid md:grid-cols-[1fr_1.6fr] gap-8">
           {/* Add Slot */}
           <div>
-            <h2 className="text-[18px] font-semibold text-[#242424] mb-4" style={{ letterSpacing: "-0.1px" }}>Add availability</h2>
+            <h2 className="text-[18px] font-semibold text-[#242424] mb-4" style={{ letterSpacing: "-0.1px" }}>
+              Add availability
+            </h2>
             <AddSlotForm />
 
             {/* Slots list */}
@@ -110,7 +111,9 @@ export default async function AdminPage() {
                         <div className="text-[12px] font-medium text-[#242424]">
                           {formatDateTime(slot.startsAt)}
                         </div>
-                        <div className="text-[11px] text-[#898989] mt-0.5">{slot.providerEmail} &bull; {slot.timezone}</div>
+                        <div className="text-[11px] text-[#898989] mt-0.5">
+                          {slot.providerEmail} &bull; {slot.timezone}
+                        </div>
                       </div>
                       <Badge
                         variant={slot.isBooked ? "destructive" : "secondary"}
@@ -128,40 +131,48 @@ export default async function AdminPage() {
           {/* Bookings queue */}
           <div>
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-[18px] font-semibold text-[#242424]" style={{ letterSpacing: "-0.1px" }}>Booking queue</h2>
-              <a href="/">
-                <button
-                  type="button"
-                  className="inline-flex items-center gap-1.5 rounded-lg bg-[#242424] px-3 py-1.5 text-[12px] font-medium text-white hover:bg-[#111111] transition-colors"
-                >
-                  <CalendarCheck className="h-3.5 w-3.5" strokeWidth={1.7} />
-                  Reserve slot
-                </button>
-              </a>
+              <h2 className="text-[18px] font-semibold text-[#242424]" style={{ letterSpacing: "-0.1px" }}>
+                Booking queue
+              </h2>
+              <Link
+                href="/"
+                className="inline-flex items-center gap-1.5 rounded-lg bg-[#242424] px-3 py-1.5 text-[12px] font-medium text-white hover:bg-[#111111] transition-colors"
+              >
+                <CalendarCheck className="h-3.5 w-3.5" strokeWidth={1.7} />
+                Reserve slot
+              </Link>
             </div>
             {bookings.length === 0 ? (
               <div className="rounded-xl border border-[rgba(34,42,53,0.08)] p-10 text-center">
                 <User className="h-6 w-6 text-[#898989] mx-auto mb-2" strokeWidth={1.5} />
-                <p className="text-[13px] text-[#898989]">No bookings yet. Share the customer link to start receiving reservations.</p>
-                <a href="/">
-                  <button
-                    type="button"
-                    className="mt-4 inline-flex items-center gap-1.5 rounded-lg border border-[rgba(34,42,53,0.12)] px-4 py-2 text-[13px] font-medium text-[#242424] hover:bg-[#f5f5f5] transition-colors"
-                  >
-                    <CalendarCheck className="h-3.5 w-3.5" strokeWidth={1.7} />
-                    Schedule a booking
-                  </button>
-                </a>
+                <p className="text-[13px] text-[#898989]">
+                  No bookings yet. Share the customer link to start receiving reservations.
+                </p>
+                <Link
+                  href="/"
+                  className="mt-4 inline-flex items-center gap-1.5 rounded-lg border border-[rgba(34,42,53,0.12)] px-4 py-2 text-[13px] font-medium text-[#242424] hover:bg-[#f5f5f5] transition-colors"
+                >
+                  <CalendarCheck className="h-3.5 w-3.5" strokeWidth={1.7} />
+                  Schedule a booking
+                </Link>
               </div>
             ) : (
               <div className="rounded-xl border border-[rgba(34,42,53,0.08)] overflow-hidden">
                 <table className="w-full">
                   <thead>
                     <tr className="border-b border-[rgba(34,42,53,0.08)] bg-[#f9f9f9]">
-                      <th className="px-4 py-3 text-left text-[11px] font-semibold text-[#898989] uppercase tracking-wider">Customer</th>
-                      <th className="px-4 py-3 text-left text-[11px] font-semibold text-[#898989] uppercase tracking-wider">Slot time</th>
-                      <th className="px-4 py-3 text-left text-[11px] font-semibold text-[#898989] uppercase tracking-wider">Note</th>
-                      <th className="px-4 py-3 text-left text-[11px] font-semibold text-[#898989] uppercase tracking-wider">Status</th>
+                      <th className="px-4 py-3 text-left text-[11px] font-semibold text-[#898989] uppercase tracking-wider">
+                        Customer
+                      </th>
+                      <th className="px-4 py-3 text-left text-[11px] font-semibold text-[#898989] uppercase tracking-wider">
+                        Slot time
+                      </th>
+                      <th className="px-4 py-3 text-left text-[11px] font-semibold text-[#898989] uppercase tracking-wider">
+                        Note
+                      </th>
+                      <th className="px-4 py-3 text-left text-[11px] font-semibold text-[#898989] uppercase tracking-wider">
+                        Status
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-[rgba(34,42,53,0.06)]">
@@ -176,7 +187,9 @@ export default async function AdminPage() {
                           </div>
                         </td>
                         <td className="px-4 py-3">
-                          <div className="text-[12px] text-[#242424]">{formatDateTime(booking.slotStartsAt ?? null)}</div>
+                          <div className="text-[12px] text-[#242424]">
+                            {formatDateTime(booking.slotStartsAt ?? null)}
+                          </div>
                           <div className="text-[11px] text-[#898989]">{booking.providerEmail}</div>
                         </td>
                         <td className="px-4 py-3">
