@@ -136,6 +136,7 @@ export default async function AdminPage() {
               </h2>
               <Link
                 href="/"
+                role="button"
                 className="inline-flex items-center gap-1.5 rounded-lg bg-[#242424] px-3 py-1.5 text-[12px] font-medium text-white hover:bg-[#111111] transition-colors"
               >
                 <CalendarCheck className="h-3.5 w-3.5" strokeWidth={1.7} />
@@ -150,6 +151,7 @@ export default async function AdminPage() {
                 </p>
                 <Link
                   href="/"
+                  role="button"
                   className="mt-4 inline-flex items-center gap-1.5 rounded-lg border border-[rgba(34,42,53,0.12)] px-4 py-2 text-[13px] font-medium text-[#242424] hover:bg-[#f5f5f5] transition-colors"
                 >
                   <CalendarCheck className="h-3.5 w-3.5" strokeWidth={1.7} />
