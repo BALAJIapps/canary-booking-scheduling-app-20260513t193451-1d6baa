@@ -44,6 +44,7 @@ export async function GET() {
     return Response.json({ ok: true, slots });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";
+    console.error(JSON.stringify({ level: "error", route: "GET /api/canary-availability", message }));
     return Response.json(
       { ok: false, error: { code: "SERVER_ERROR", message } },
       { status: 500 }

@@ -7,8 +7,11 @@ import AddSlotForm from "@/components/add-slot-form";
 
 export const dynamic = "force-dynamic";
 
+// NOTE: This admin page is intentionally open for the canary demo (no user accounts).
+// In production, protect with middleware: check session and redirect non-admins.
+
 function formatDateTime(iso: Date | null) {
-  if (!iso) return "—";
+  if (!iso) return "\u2014";
   return new Date(iso).toLocaleString("en-US", {
     month: "short",
     day: "numeric",
@@ -150,7 +153,7 @@ export default async function AdminPage() {
                           <div className="text-[11px] text-[#898989]">{booking.providerEmail}</div>
                         </td>
                         <td className="px-4 py-3">
-                          <span className="text-[12px] text-[#898989]">{booking.note ?? "—"}</span>
+                          <span className="text-[12px] text-[#898989]">{booking.note ?? "\u2014"}</span>
                         </td>
                         <td className="px-4 py-3">
                           <div className="flex items-center gap-1.5">
