@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, Loader2, CheckCircle } from "lucide-react";
+import { CalendarCheck, Loader2, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -107,21 +107,35 @@ export default function AddSlotForm() {
       {success && (
         <div className="mt-3 flex items-center gap-2 text-green-700">
           <CheckCircle className="h-3.5 w-3.5" strokeWidth={1.8} />
-          <span className="text-[12px]">Slot scheduled successfully!</span>
+          <span className="text-[12px]">Slot added successfully!</span>
         </div>
       )}
 
-      <Button
-        type="submit"
-        disabled={loading}
-        className="mt-4 w-full bg-[#242424] hover:bg-[#111111] text-white text-[13px] h-9"
-      >
-        {loading ? (
-          <><Loader2 className="h-3.5 w-3.5 animate-spin mr-2" />Scheduling...</>
-        ) : (
-          <><Plus className="h-3.5 w-3.5 mr-2" />Schedule slot</>
-        )}
-      </Button>
+      <div className="mt-4 grid grid-cols-2 gap-2">
+        <Button
+          type="submit"
+          disabled={loading}
+          className="bg-[#242424] hover:bg-[#111111] text-white text-[13px] h-9"
+        >
+          {loading ? (
+            <><Loader2 className="h-3.5 w-3.5 animate-spin mr-1.5" />Saving...</>
+          ) : (
+            <>Save slot</>
+          )}
+        </Button>
+        <Button
+          type="submit"
+          disabled={loading}
+          variant="outline"
+          className="text-[13px] h-9 border-[rgba(34,42,53,0.12)] text-[#242424] hover:bg-[#f5f5f5]"
+        >
+          {loading ? (
+            <><Loader2 className="h-3.5 w-3.5 animate-spin mr-1.5" />...</>
+          ) : (
+            <><CalendarCheck className="h-3.5 w-3.5 mr-1.5" strokeWidth={1.7} />Schedule</>
+          )}
+        </Button>
+      </div>
     </form>
   );
 }
