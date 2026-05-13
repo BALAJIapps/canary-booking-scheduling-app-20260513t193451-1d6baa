@@ -1,5 +1,6 @@
-import { Calendar, Clock, CheckCircle, Users, ShieldCheck } from "lucide-react";
+import { Calendar, Clock, CheckCircle, Users, ShieldCheck, Plus } from "lucide-react";
 import BookingInterface from "@/components/booking-interface";
+import QuickAddSlot from "@/components/quick-add-slot";
 
 export default function HomePage() {
   return (
@@ -38,7 +39,7 @@ export default function HomePage() {
             Book a slot.<br />Skip the back-and-forth.
           </h1>
           <p className="text-[17px] text-[#898989] leading-relaxed mb-8">
-            Pick an open time, enter your email, and you&apos;re confirmed — no login required.
+            Pick an open time, enter your email, and you&apos;re confirmed &mdash; no login required.
             Providers set their availability once; customers book in seconds.
           </p>
           <div className="flex items-center gap-4">
@@ -73,6 +74,21 @@ export default function HomePage() {
             </div>
           ))}
         </div>
+      </section>
+
+      {/* Quick add slot for providers */}
+      <section className="mx-auto max-w-6xl px-6 pb-10">
+        <div className="flex items-center gap-2 mb-4">
+          <Plus className="h-4 w-4 text-[#898989]" strokeWidth={1.7} />
+          <h2
+            className="text-[18px] font-semibold text-[#242424]"
+            style={{ letterSpacing: "-0.1px" }}
+          >
+            Add availability
+          </h2>
+          <span className="text-[12px] text-[#898989] ml-1">(providers)</span>
+        </div>
+        <QuickAddSlot />
       </section>
 
       {/* Booking section */}

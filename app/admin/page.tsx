@@ -1,9 +1,10 @@
 import { db } from "@/db";
 import { canaryBookings, canaryAvailabilitySlots } from "@/db/schema";
 import { eq } from "drizzle-orm";
-import { Calendar, Clock, User, ShieldCheck, CheckCircle, XCircle } from "lucide-react";
+import { Calendar, Clock, User, ShieldCheck, CheckCircle, XCircle, CalendarCheck } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import AddSlotForm from "@/components/add-slot-form";
+import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
@@ -56,7 +57,16 @@ export default async function AdminPage() {
             <ShieldCheck className="h-5 w-5 text-[#242424]" strokeWidth={1.7} />
             <span className="text-[15px] font-semibold text-[#242424] tracking-tight">SlotBook Admin</span>
           </div>
-          <a href="/" className="text-[13px] text-[#898989] hover:text-[#242424] transition-colors">&larr; Customer view</a>
+          <div className="flex items-center gap-3">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-[rgba(34,42,53,0.12)] px-3.5 py-1.5 text-[13px] font-medium text-[#242424] hover:bg-[#f5f5f5] transition-colors"
+            >
+              <CalendarCheck className="h-3.5 w-3.5" strokeWidth={1.7} />
+              Reserve a slot
+            </Link>
+            <a href="/" className="text-[13px] text-[#898989] hover:text-[#242424] transition-colors">&larr; Customer view</a>
+          </div>
         </div>
       </nav>
 
@@ -120,7 +130,16 @@ export default async function AdminPage() {
 
           {/* Bookings queue */}
           <div>
-            <h2 className="text-[18px] font-semibold text-[#242424] mb-4" style={{ letterSpacing: "-0.1px" }}>Booking queue</h2>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-[18px] font-semibold text-[#242424]" style={{ letterSpacing: "-0.1px" }}>Booking queue</h2>
+              <Link
+                href="/"
+                className="inline-flex items-center gap-1.5 rounded-lg bg-[#242424] px-3 py-1.5 text-[12px] font-medium text-white hover:bg-[#111111] transition-colors"
+              >
+                <CalendarCheck className="h-3.5 w-3.5" strokeWidth={1.7} />
+                Schedule booking
+              </Link>
+            </div>
             {bookings.length === 0 ? (
               <div className="rounded-xl border border-[rgba(34,42,53,0.08)] p-10 text-center">
                 <User className="h-6 w-6 text-[#898989] mx-auto mb-2" strokeWidth={1.5} />
